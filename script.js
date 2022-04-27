@@ -119,12 +119,16 @@ addProdutos();
 // carrega localStorage do carrinho
 
 window.onload = async () => {
-  listaCarrinho = getSavedCartItems();
-  listaCarrinho.forEach(async (idProduto) => {
-    const data = await fetchItem(idProduto);
-    const novoElemento = createCartItemElement(data);
-    const carrinho = document.getElementsByClassName('cart__items');
-    carrinho[0].appendChild(novoElemento);
-    await atualizaValorCarrinho();
-  });
+  listaCarrinho = JSON.parse(getSavedCartItems());
+  if (listaCarrinho === null) {
+    localStorage.setItem('cartItems', JSON.stringify([]));
+  } else {
+    listaCarrinho.forEach(async (idProduto) => {
+      const data = await fetchItem(idProduto);
+      const novoElemento = createCartItemElement(data);
+      const carrinho = document.getElementsByClassName('cart__items');
+      carrinho[0].appendChild(novoElemento);
+      await atualizaValorCarrinho();
+    });
+  }
 };

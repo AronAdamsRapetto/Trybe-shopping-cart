@@ -1,10 +1,5 @@
 const getSavedCartItems = () => {
-  // seu código aqui
-  if (localStorage.getItem('cartItems') === null) {
-    localStorage.setItem('cartItems', JSON.stringify([]));
-    return [];
-  }
-  const carrinhoCompras = JSON.parse(localStorage.getItem('cartItems'));
+  const carrinhoCompras = localStorage.getItem('cartItems');
   return carrinhoCompras;   
 };
 
