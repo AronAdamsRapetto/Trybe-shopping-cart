@@ -94,12 +94,13 @@ const salvaProduto = async (event) => {
 
 const addProdutos = async () => {
   const dataProdutos = await fetchProducts();
-  await dataProdutos.forEach((produto) => {  
+  document.getElementsByClassName('loading')[0].remove();
+  await dataProdutos.forEach((produto) => {
     const novoElemento = createProductItemElement(produto);
     novoElemento.lastChild.addEventListener('click', salvaProduto);
     const sectionItems = document.getElementsByClassName('items');
     sectionItems[0].appendChild(novoElemento);
-  });
+  });   
 };
 
 // Implementa função para limpar carrinho
