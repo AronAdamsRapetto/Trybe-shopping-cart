@@ -93,7 +93,8 @@ const salvaProduto = async (event) => {
 // adiciona tabla de produtos 
 
 const addProdutos = async () => {
-  const dataProdutos = await fetchProducts();
+  const data = await fetchProducts('computador');
+  const dataProdutos = data.results;
   document.getElementsByClassName('loading')[0].remove();
   await dataProdutos.forEach((produto) => {
     const novoElemento = createProductItemElement(produto);
