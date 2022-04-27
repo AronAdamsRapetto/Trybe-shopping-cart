@@ -91,7 +91,7 @@ const salvaProduto = async (event) => {
   await atualizaValorCarrinho();  
 };
 
-// adiciona tabla de produtos 
+// adiciona tabla de produtos
 
 const addProdutos = async () => {
   const data = await fetchProducts('computador');
