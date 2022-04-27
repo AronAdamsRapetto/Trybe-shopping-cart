@@ -122,6 +122,7 @@ window.onload = async () => {
   listaCarrinho = JSON.parse(getSavedCartItems());
   if (listaCarrinho === null) {
     localStorage.setItem('cartItems', JSON.stringify([]));
+    listaCarrinho = [];
   } else {
     listaCarrinho.forEach(async (idProduto) => {
       const data = await fetchItem(idProduto);
