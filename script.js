@@ -35,8 +35,9 @@ function getSkuFromProductItem(item) {
 
 // Atualiza valor total do carrinho
 
-const getValor = async () => {   
-  const produtos = await fetchProducts();
+const getValor = async () => {
+  const data = await fetchProducts('computador');
+  const produtos = await data.results;  
   const precos = [];
   listaCarrinho.forEach((id) => {
     precos.push(produtos.find((produto) => produto.id === id));
