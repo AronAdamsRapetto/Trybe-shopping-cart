@@ -35,7 +35,7 @@ function getSkuFromProductItem(item) {
 
 // Atualiza valor total do carrinho
 
-const getValores = async () => {   
+const getValor = async () => {   
   const produtos = await fetchProducts();
   const precos = [];
   listaCarrinho.forEach((id) => {
@@ -45,9 +45,9 @@ const getValores = async () => {
   return valorTotal;
 };
 
-const criaElementoCustoCarrinho = async () => {
+const atualizaValorCarrinho = async () => {
   const textoPreço = document.getElementsByClassName('total-price'); 
-  total = await getValores(); 
+  total = await getValor(); 
   textoPreço[0].innerText = `${total}`;
 };
 
@@ -58,7 +58,7 @@ function cartItemClickListener(event) {
   const id = elemento.innerText.slice(5, 18);
   listaCarrinho = listaCarrinho.filter((idProduto) => id !== idProduto);
   saveCartItems(listaCarrinho); 
-  criaElementoCustoCarrinho();
+  atualizaValorCarrinho();
   elemento.remove();  
 }
 
@@ -87,7 +87,7 @@ const salvaProduto = async (event) => {
   const novoElemento = createCartItemElement(data);
   const carrinho = document.getElementsByClassName('cart__items');
   carrinho[0].appendChild(novoElemento);
-  await criaElementoCustoCarrinho();  
+  await atualizaValorCarrinho();  
 };
 
 // adiciona tabla de produtos 
@@ -102,6 +102,15 @@ const addProdutos = async () => {
   });
 };
 
+// Implementa função para limpar carrinho
+
+document.getElementsByClassName('empty-cart')[0].addEventListener('click', () => {
+  document.getElementsByClassName('cart__items')[0].innerHTML = '';  
+  document.getElementsByClassName('total-price')[0].innerText = '0';
+  listaCarrinho = [];
+  localStorage.clear();
+});
+
 addProdutos();
 
 // carrega localStorage do carrinho
@@ -113,6 +122,6 @@ window.onload = async () => {
     const novoElemento = createCartItemElement(data);
     const carrinho = document.getElementsByClassName('cart__items');
     carrinho[0].appendChild(novoElemento);
-    await criaElementoCustoCarrinho();
+    await atualizaValorCarrinho();
   });
 };
