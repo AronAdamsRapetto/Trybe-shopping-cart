@@ -1,6 +1,6 @@
 const saveCartItems = (ids) => {
   // seu código aqui
-  localStorage.setItem('carrinho', JSON.stringify(ids));
+  localStorage.setItem('cartItems', JSON.stringify(ids));
 };
 
 if (typeof module !== 'undefined') {
